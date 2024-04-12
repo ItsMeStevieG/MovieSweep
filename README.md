@@ -31,8 +31,6 @@ To use `MovieSweep`, place the `MovieSweep.exe` executable in the root directory
 
 Example usage:
 
-cssCopy code
-
 `MovieSweep.exe -v -a`
 
 ## Requirements
