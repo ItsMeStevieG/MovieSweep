@@ -37,8 +37,8 @@ jobs:
         with:
           name: MovieSweep
           path: ./publish/
-          compression-level: 0  # Optional: Adjust compression (0-9, 0 for no compression)
-          retention-days: 7      # Optional: Store artifacts for 7 days
+          if-no-files-found: error  # Fails the workflow if no files are found
+          retention-days: 7          # Optional: Keeps artifacts for 7 days
 
   release:
     needs: build
@@ -56,6 +56,7 @@ jobs:
           path: ./publish/
 
       - name: Zip Release
+        shell: pwsh
         run: Compress-Archive -Path ./publish/* -DestinationPath MovieSweep.zip
 
       - name: Upload Release Asset
