@@ -10,6 +10,10 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: write  # Needed for release uploads
+  actions: write  # Needed for artifact management
+
 jobs:
   build:
     runs-on: windows-latest
@@ -37,8 +41,9 @@ jobs:
         with:
           name: MovieSweep
           path: ./publish/
-          if-no-files-found: error  # Fails the workflow if no files are found
-          retention-days: 7          # Optional: Keeps artifacts for 7 days
+          if-no-files-found: error  # Fail if files are missing
+          compression-level: 0  # Optional: 0 for no compression (faster upload)
+          retention-days: 7  # Keep artifacts for 7 days
 
   release:
     needs: build
