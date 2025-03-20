@@ -33,7 +33,7 @@ jobs:
         run: dotnet publish -c Release -o ./publish
 
       - name: Archive Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.0 # Updated to the latest version
         with:
           name: MovieSweep
           path: ./publish
