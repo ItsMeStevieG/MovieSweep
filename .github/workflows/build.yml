@@ -32,11 +32,12 @@ jobs:
       - name: Publish Executable
         run: dotnet publish -c Release -o ./publish
 
-      - name: Archive Build Artifacts
+      - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: MovieSweep
-          path: ./publish
+          path: ./publish/
+          retention-days: 7  # Set how many days to retain the artifact
 
   release:
     needs: build
@@ -48,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: MovieSweep
-          path: ./publish
+          path: ./publish/
 
       - name: Zip Release
         run: Compress-Archive -Path ./publish/* -DestinationPath MovieSweep.zip
